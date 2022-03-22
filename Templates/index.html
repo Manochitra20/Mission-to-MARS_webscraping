@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mars Mission</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="jumbotron text-center">
+      <h1 style="color: rgb(236, 25, 25)">MISSION TO MARS</h1>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+    </div>
+
+    <div class="row" id="news">
+      <div class="col-md-12">
+        <h2>MARS Latest News</h2>
+        <h3>{{ mars_scrape.news_title}}</h3>
+        <p>{{ mars_scrape.news_para}} </p>
+      </div>
+    </div>
+
+
+    <div class="container-fluid">
+      <div class="row ">
+        <div class="col-6">
+          <h4 class="header"><b>Featured MARS Image</b></h4>
+          <div class="text-left">
+            <img src={{mars_scrape.featured_img_url}} width="300" height="200" alt="Image">
+          </div>
+        </div>
+        <div class="col-4">
+          <h1 class="header"><b>MARS Facts</b></h1>
+          <div class="text-left">
+            {{ mars_scrape.table_html | safe}}
+          </div>
+        </div>
+      </div>
+      <h5 class="text-center"><b>MARS Hemispheres</b></h5>
+      <hr>
+      {% for hemi in mars_scrape.hemis_url %}
+      <div class="col-md-6">
+        <div class="thumbnail">
+          <img src="{{hemisphere.img_url}}" alt="image" />
+          <div class="caption">
+            <h6>{{hemis_url.title}}</h6>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</body>
+
+</html>
