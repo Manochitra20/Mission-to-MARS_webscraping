@@ -6,10 +6,11 @@ import requests
 import time
 from webdriver_manager.chrome import ChromeDriverManager
 
-def scrape_mars():
+def scrape_info():
     # browser = init_browser()
     executable_path = {'executable_path': ChromeDriverManager().install()}
     browser = Browser('chrome', **executable_path, headless=False)
+
 
     #Scraping the Mars webpage to collect new title and text
     news_url= "https://redplanetscience.com/"
@@ -17,17 +18,17 @@ def scrape_mars():
 
     time.sleep(1)
 
-    #scraping into soup
+    #scraping page into soup
     html = browser.html
     soup = BeautifulSoup(html, "html.parser")
 
-    #finding the first list item
+    #finding the first news item
     news = soup.find("div", class_='list_text')
 
     #finding the latest news title
     news_title = news.find_all("div", class_="content_title")[0].text
 
-    #finding the lateste news text
+    #finding the latest news text
     news_para = news.find_all("div", class_ ="article_teaser_body")[0].text
 
 
@@ -41,7 +42,7 @@ def scrape_mars():
 
     image_path = soup.find_all("img")[1]["src"]
     featured_img_url = image_url + image_path
-    featured_img_url
+    
 
     #Scraping the Mars webpage to collect facts about Mars
     table_url= "https://galaxyfacts-mars.com/"
@@ -52,7 +53,7 @@ def scrape_mars():
     tables2 = tables[1:]
     #converting dataframe to html
     table_html=tables2.to_html()
-    table_html
+    
 
     #Scraping the Mars webpage to collect hemisphere names and images
     hemisphere_url="https://marshemispheres.com/"
@@ -85,6 +86,7 @@ def scrape_mars():
         # Storing findings and appending to list
 
         hemispheres['Image_url'] = image_url
+        hemispheres['Title'] =title
                     
         hemis_url.append(hemispheres)
         
@@ -93,30 +95,29 @@ def scrape_mars():
         browser.back()
 
     #Removing enhanced from the hemsiphere names
-    hemi1='Cereberus Hemisphere Enhanced'
-    newhemi1 = hemi1.rsplit(' ', 1)[0]
-    hemi2='Schiaparelli Hemisphere Enhanced'
-    newhemi2 = hemi2.rsplit(' ', 1)[0]
-    hemi3='Syrtis Major Hemisphere Enhanced'
-    newhemi3 = hemi3.rsplit(' ', 1)[0]
-    hemi4='Valles Marineris Hemisphere Enhanced'
-    newhemi4 = hemi4.rsplit(' ', 1)[0]
-    title={newhemi1, newhemi2, newhemi3, newhemi4}
+    #newhemi1 = hemi1.rsplit(' ', 1)[0]
+    #hemi2='Schiaparelli Hemisphere Enhanced'
+    #newhemi2 = hemi2.rsplit(' ', 1)[0]
+    #hemi3='Syrtis Major Hemisphere Enhanced'
+    #newhemi3 = hemi3.rsplit(' ', 1)[0]
+    #hemi4='Valles Marineris Hemisphere Enhanced'
+    #newhemi4 = hemi4.rsplit(' ', 1)[0]
+    #title={newhemi1, newhemi2, newhemi3, newhemi4}
 
     #appending title to the list
-    hemis_url.append(title)
+    #hemis_url.append(title)
 
     #Storing all the scrapped data into dict
-    mars_scrape={
+    mars_listing_data={
          "news title": news_title,
          "news para": news_para,
          "featured image": featured_img_url,
          "mars facts": table_html,
-         "hemisphere data": hemis_url
+         "hemisphere url": hemis_url
      }
     #Quit the browser
     browser.quit()
 
     #returning scrapping data
-    return mars_scrape
+    return mars_listing_data
 
