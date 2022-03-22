@@ -109,11 +109,11 @@ def scrape_info():
 
     #Storing all the scrapped data into dict
     mars_listing_data={
-         "news title": news_title,
-         "news para": news_para,
-         "featured image": featured_img_url,
-         "mars facts": table_html,
-         "hemisphere url": hemis_url
+         "news_title": news_title,
+         "news_para": news_para,
+         "featured_image": featured_img_url,
+         "mars_facts": table_html,
+         "hemisphere_url": hemis_url
      }
     #Quit the browser
     browser.quit()

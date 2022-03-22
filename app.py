@@ -15,7 +15,7 @@ mongo = PyMongo(app)
 def home():
     # Find one record of data from the mongo database
     mars_listing = mongo.db.mars_listing.find_one()
-
+    #print(mars_listing)
     # Return template and data
     return render_template("index.html", mars_listing=mars_listing)
 

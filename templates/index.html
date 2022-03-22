@@ -10,50 +10,105 @@
 </head>
 
 <body>
-  <div class="container-fluid">
+  <div class="container-fluid" >
     <div class="jumbotron text-center">
       <h1 style="color: rgb(236, 25, 25)">MISSION TO MARS</h1>
       <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Get MARS Data!</a></p>
     </div>
-
+<!--News section-->
+<div class="container-fluid">
     <div class="row" id="news">
       <div class="col-md-12">
-        <h2>MARS Latest News</h2>
-        <h3>{{ mars_listing.news_title}}</h3>
+        <h2 style="text-align: left;"><b>MARS Latest News</b></h2>
+        <h3 style="color: blueviolet;">{{ mars_listing.news_title}}</h3>
         <p>{{ mars_listing.news_para}} </p>
       </div>
     </div>
-
-
+</div>
+<!--Featured image section-->
     <div class="container-fluid">
-      <div class="row ">
-        <div class="col-6">
-          <h4 class="header"><b>Featured MARS Image</b></h4>
-          <div class="text-left">
-            <img src={{mars_listing.featured_img_url}} width="300" height="200" alt="Image">
+      <div class="row" id="image">
+        <div class="col-md-12">
+          <h4 class="title" style="font-size: large;"><b>Featured MARS Image</b></h4>
+            <img src={{mars_listing.featured_image}} width="500" height="500" alt="Featured Image">
           </div>
         </div>
-        <div class="col-4">
-          <h1 class="header"><b>MARS Facts</b></h1>
-          <div class="text-left">
-            {{ mars_listing.table_html | safe}}
+    </div>
+      
+<!--table section-->
+      <div class="container-fluid">
+        <div class = "row" id="table">
+            <div class = "col-md-12">
+          <h1 class="title"><b>MARS Facts</b></h1>
+          <style>
+            table {
+              font-family: arial, sans-serif;
+              border-collapse: collapse;
+              width: 100%;
+            }
+            
+            td, th {
+              border: 1px solid #dddddd;
+              text-align: left;
+              padding: 8px;
+            }
+            
+            tr:nth-child(even) {
+              background-color: #dddddd;
+            }
+        </style>
+          <div class="text-centre">
+            {{ mars_listing.mars_facts | safe}}
           </div>
         </div>
       </div>
-      <h5 class="text-center"><b>MARS Hemispheres</b></h5>
-      <hr>
-      {% for hemi in mars_listing.hemis_url %}
-      <div class="col-md-6">
-        <div class="thumbnail">
-          <img src="{{hemisphere.img_url}}" alt="image" />
-          <div class="caption">
-            <h6>{{mars_listing.hemis_url}}</h6>
-          </div>
+
+
+<!--Mars hemispheres section-->  
+      <div class="container-fluid">
+        <div class = "row ">
+            <div class = "col-md-12">
+                <h5 class = "title" style="font-size: larger;"><b>MARS Hemispheres</b> </h5>
+            </div>
         </div>
+        <div class = "container-fluid">
+            <div class = "row ">
+              <div class="col-md-12">
+                <div class="title" style="color: rgb(62, 50, 226);">
+                <h5 style="font-size: large;">{{mars_listing.hemisphere_url[0].Title}}</h5>
+                </div>
+                  <img src = "{{mars_listing.hemisphere_url[0].Image_url}}"  width="500" height="500" alt = "Cerberus Hemisphere">
+              </div>
+              <div class="col-md-12">
+                <div class="title" style="color: rgb(62, 50, 226);">
+                <h5 style="font-size: large;">{{mars_listing.hemisphere_url[1].Title}}</h5>
+                </div>
+                  <img src = "{{mars_listing.hemisphere_url[1].Image_url}}"  width="500" height="500" alt = "Cerberus Hemisphere">
+              </div>
+
+              <div class="col-md-12">
+                <div class="title" style="color: rgb(62, 50, 226);">
+                <h5 style="font-size: large;">{{mars_listing.hemisphere_url[2].Title}}</h5>
+                </div>
+                  <img src = "{{mars_listing.hemisphere_url[2].Image_url}}"  width="500" height="500" alt = "Cerberus Hemisphere">
+              </div>
+
+              <div class="col-md-12">
+                <div class="title" style="color: rgb(62, 50, 226);">
+                <h5 style="font-size: large;">{{mars_listing.hemisphere_url[3].Title}}</h5>
+                </div>
+                  <img src = "{{mars_listing.hemisphere_url[3].Image_url}}"  width="500" height="500" alt = "Cerberus Hemisphere">
+              </div>
+              
+            </div>
+          </div>
       </div>
-      {% endfor %}
     </div>
   </div>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 
 </html>
